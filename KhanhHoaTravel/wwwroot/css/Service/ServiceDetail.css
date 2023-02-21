@@ -1,0 +1,113 @@
+﻿.mainContent {
+    display: flex;
+    flex-direction: row;
+    padding: 1rem;
+    background-repeat: none;
+    background-size: cover;
+    background-position: center;
+    background-image: url("https://cdn.vntrip.vn/cam-nang/wp-content/uploads/2017/01/Vinpearl-Nha-Trang-e1502893616621.png");
+    transition: all 1s ease;
+}
+
+.main-img > img {
+    width: 420px;
+    height: 350px;
+    object-fit: cover;
+    transition: all 1s ease;
+    border-radius: 2rem;
+}
+
+.sub-img {
+    display: flex;
+    flex-direction: row;
+}
+
+    .sub-img > img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        margin: 20px 5px;
+        border: 1px solid black;
+        border-radius: 2rem;
+    }
+
+
+.content {
+    z-index: 2;
+    color: #fff;
+    width: 50%;
+    margin: 5px 0px 5px 15px;
+}
+    .content > h2 {
+        color: wheat;
+    }
+    .content > #Descr {
+        max-height: 300px;
+        overflow-x: hidden;
+        text-overflow: ellipsis;
+    }
+        .content > #Descr::-webkit-scrollbar {
+            display: none; /* cho Chrome, Safari, and Opera */
+        }
+
+
+.place-img {
+    z-index: 2;
+}
+
+.blur {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 0;
+    width: 72.768vw;
+    height: 100vh;
+}
+
+.delete_btn {
+    padding: 5px;
+    border-radius: 0.75rem;
+    background-color: #f00;
+    width: 60px;
+}
+.delete_btn > a {
+    color: white;
+    text-decoration:none;
+}
+    .delete_btn:hover {
+        background-color: #e00;
+    }
+/*Display header*/
+body {
+    background: #e4e6eb;
+}
+
+.mainPost {
+    text-align: center;
+}
+
+.header {
+    background-color: var(--body-color) !important;
+    box-shadow: 0 0 4px rgba(14, 55, 63, 0.15);
+}
+
+    .header .nav__logo,
+    .header .nav__toggle,
+    .header .nav__link {
+        color: var(--title-color);
+    }
+
+    .header .logo__image {
+        opacity: 1;
+    }
+
+    .header .dropMenu {
+        background-color: var(--body-color);
+        box-shadow: 0 0 4px rgba(14, 55, 63, 0.15);
+        border-radius: 10px;
+        border: 0px solid black;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    }
+/*Display footer*/
+footer {
+    background: var(--body-color);
+}

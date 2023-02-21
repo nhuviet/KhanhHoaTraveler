@@ -1,0 +1,177 @@
+﻿@{
+    ViewData["Title"] = "Thông tin";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
+<link href="~/css/Home/User_info.css" rel="stylesheet" />
+<script src="~/js/Home/User_info.js"></script>
+@{
+    _User u = ViewBag.LoginUser;
+    if (u == null)
+        u = new _User();
+    <section style="background-color: #eee;">
+        <img src="~/image/resort1.jpg" class="absolute" />
+        <div class="container py-5">
+            <h2 style="text-align: center; margin: 2em;color: #01021f;position:relative;font-weight:bold">
+                Thông tin cá nhân
+            </h2>
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="card mb-4 tran-card">
+                        <div class="card-body text-center">
+                            <img src="@u.Image" alt="avatar" class="rounded-circle img-fluid avt" />
+                            <h5 class="my-3">@u.FullName</h5>
+                            <div class="d-flex justify-content-center mb-2">
+                                <button type="button" class="btn btn-primary">Follow</button>
+                                <button type="button" class="btn btn-outline-primary ms-1">Message</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mb-4 mb-lg-0">
+                        <div class="card-body p-0">
+                            <ul class="list-group list-group-flush rounded-3"></ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="card mb-4 tran-card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Full Name</p>
+                                </div>
+                                <div class="col-sm-8">
+                                    <p class="text-muted mb-0">@u.FullName</p>
+                                </div>
+                                <div class="col-sm-1" onclick="showEditForm()">
+                                    <i class="fa-solid fa-pen"></i>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Email</p>
+                                </div>
+                                <div class="col-sm-8">
+                                    <p class="text-muted mb-0">@u.Email</p>
+                                </div>
+                                <div class="col-sm-1" onclick="showEditForm()">
+                                    <i class="fa-solid fa-pen"></i>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Phone</p>
+                                </div>
+                                <div class="col-sm-8">
+                                    <p class="text-muted mb-0">@u.Phone</p>
+                                </div>
+                                <div class="col-sm-1" onclick="showEditForm()">
+                                    <i class="fa-solid fa-pen"></i>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
+                                </div>
+                                @{
+                                    if (@u.FaceBook != "")
+                                    {
+                                        <div class="col-sm-8">
+                                            <p class="mb-0"><a href="@u.FaceBook" style="text-decoration:none;" target="_blank">FaceBook</a></p>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="col-sm-8"></div>
+                                    }
+                                }
+                                <div class="col-sm-1" onclick="showEditForm()">
+                                    <i class="fa-solid fa-pen"></i>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <i class="fas fa-globe fa-lg text-warning"></i>
+                                </div>
+                                @{
+                                    if (@u.Website != "")
+                                    {
+                                        <div class="col-sm-8">
+                                            <p class="mb-0"><a href="@u.Website" target="_blank" style="text-decoration:none;">Website</a></p>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="col-sm-8"></div>
+                                    }
+                                }
+
+                                <div class="col-sm-1" onclick="showEditForm()">
+                                    <i class="fa-solid fa-pen" onclick="change()"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <div id="overlay" onclick="hideEditForm()"></div>
+    <!--Form user infomation change-->
+    <div class="UserEditForm" style="display: none;" id="editForm">
+        <form class="editform" action="UpdateUserInfo" method="post" enctype="multipart/form-data">
+            <input id="Id" type="text" name="Id" value="@u.Id" style="display: none;" required>
+            <input id="UserName" type="text" value="@u.UserName" style="display: none;" required>
+            <input id="Password" type="text" value="@u.Password" style="display: none;" required>
+            <input id="Role" type="text" value="@u.Role" style="display: none;" required>
+            <input id="DateCreate" type="text" value="@u.DateCreate" style="display: none;" required>
+            <div class="right-side">
+                <div class="avatar-upload">
+                    <div class="avatar-edit">
+                        <input type='file' name="Image" id="imageUpload" accept=".png, .jpg, .jpeg" onchange="loadImg()" />
+                        <label for="imageUpload"></label>
+                    </div>
+                    <div class="avatar-preview">
+                        <div id="imagePreview" style="background-image: url(@u.Image);"></div>
+                    </div>
+                    <input id="name" name="FullName" type="text" placeholder="Your FullName" value="@u.FullName" required>
+                </div>
+            </div>
+            <div class="left-side">
+                <table>
+                    <tr>
+                        <td><label for="phone">Phone number:</label></td>
+                        <td><input id="phone" name="Phone" type="text" placeholder="0123456789" value="@u.Phone"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="mail">Email address:</label></td>
+                        <td><input id="mail" name="Email" type="text" placeholder="example@gmail.com" value="@u.Email"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="fb">Facebook: </label></td>
+                        <td><input id="fb" name="FaceBook" type="text" placeholder="fb.com/example" value="@u.FaceBook"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="blog">Blog: </label></td>
+                        <td><input id="blog" name="Website" type="text" placeholder="example.com" value="@u.Website"></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="btn-area">
+                <input type="submit" action="submit" value="Save">
+                <!-- <button name="button" value="cancle" type="button"  onclick="alert('Information not saved')">Cancel</button> -->
+            </div>
+        </form>
+    </div>
+}
+
+
+

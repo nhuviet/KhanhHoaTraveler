@@ -1,0 +1,176 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+/* Provide sufficient contrast against white background */
+a {
+  color: #0366d6;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+
+a{
+    text-decoration:none;
+}
+a:hover {
+    text-decoration: none;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px; /* Vertically center the text there */
+}
+/******************CHATBOX STYLING***********************/
+.btn-opCB {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    color: white;
+    background: #2e89ff;
+    position: relative;
+    right: 50px;
+    margin: 10px;
+    text-align:center;
+}
+    .btn-opCB:hover {
+        background: #1d78ff;
+    }
+    .btn-opCB i {
+        position: relative;
+        font-size: 30px;
+    }
+
+#KHTChatbox {
+    display: none;
+}
+
+.chatbox {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    line-height: 20px;
+}
+
+    .chatbox .cb-header {
+        background-color: #f1f1f1;
+        padding: 10px;
+        border-radius: 5px 5px 0 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+        .chatbox .cb-header h3 {
+            margin: 0;
+            font-size:25px;
+        }
+
+    .chatbox .header #cb-close-btn {
+        border: none;
+        background-color: transparent;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    .chatbox .messages {
+        height: 200px;
+        padding: 10px;
+        overflow-y: scroll;
+    }
+
+        .chatbox .messages p {
+            margin: 0 0 10px;
+            line-height: 20px;
+            font-size: 15px;
+        }
+
+    .chatbox .cb-input {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        border-top: 1px solid #ccc;
+        line-height: 20px;
+    }
+
+        .chatbox .cb-input input[type="text"] {
+            flex: 1;
+            padding: 5px;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .chatbox .cb-input button {
+            margin-left: 10px;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+        }
+/****************************************************/

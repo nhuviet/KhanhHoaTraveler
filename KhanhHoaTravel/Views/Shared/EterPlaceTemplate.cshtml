@@ -1,0 +1,54 @@
+﻿@model KhanhHoaTravel.Models.EntertainmentPlace
+
+<div class="item" onload="setStage(@Model.Id)" >
+    <a href="@Url.Action("PlaceDetail", "Service", new { id = Model.Id })">
+        <div class="img-hover-zoom">
+            <img src="@Model.ImagePath">
+        </div>
+        <h3>@Model.Title</h3>
+        <h5>Time: <span id="timeOpen">@Model.TimeOpen</span> - <span id="timeClose">@Model.TimeClose</span> <span class="badge badge-pill badge-primary" id="stage"></span></h5>
+    </a>
+</div>
+
+@*<span class="badge badge-pill badge-primary">
+    <small>@Model.Price.ToString("c")</small>
+</span>*@
+<script>
+    function setStage() {
+        let today = new Date();
+
+        // Tgian hiện tại
+        let Current_h = Number(today.getHours());
+        let Current_m = Number(today.getMinutes());
+        
+        let open_time_h = Number(timeOpen.innerHTML.slice(0, 2));
+        let close_time_h = Number(timeClose.innerHTML.slice(0, 2));
+        let open_time_m = Number(timeOpen.innerHTML.slice(3));
+        let close_time_m = Number(timeClose.innerHTML.slice(3));
+
+
+        alert(document.getElementById("timeOpen").value);
+        //let pass = document.getElementById("pass").value;
+
+        document.getElementById('stage').innerHTML = "Open";
+        if (isOpen(Current_h, Current_m, open_time_h, close_time_h, open_time_m, close_time_m)) {
+            document.getElementById('stage').innerHTML = "Open";
+        }
+        else {
+            document.getElementById('stage').innerHTML = "Closed";
+        }
+
+    }
+    function isOpen(Current_h, Current_m, open_time_h, close_time_h, open_time_m, close_time_m) {
+        if (Current_h >= open_time_h && Current_h <= close_time_h) {
+            if (Current_h == open_time_h || Current_h == close_time_h) {
+                if (Current_m > open_time_m) {
+                    if (Current_m < close_time_m) {
+                        return 1;
+                    }
+                }
+            }
+        }
+        return 0;
+    }
+</script>

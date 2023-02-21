@@ -1,0 +1,73 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_adminLayout";
+}
+<link href="~/css/Admin/table.css" rel="stylesheet" />
+<div class="wrapper">
+    <div class="table">
+        <div class="row header">
+            <div class="cell">
+                ID
+            </div>
+            <div class="cell">
+                Author
+            </div>
+            <div class="cell">
+                TimeModified
+            </div>
+            <div class="cell">
+                Content
+            </div>
+            <div class="cell">
+                Status
+            </div>
+            <div class="cell"></div>
+        </div>
+        <!--Data-->
+        @{ 
+            List<Post> posts = new List<Post>();
+            posts = ViewBag.postList;
+            foreach(var p in posts)
+            {
+                <div class="row">
+                    <div class="cell" data-title="ID">@p.Id </div>
+                    <div class="cell" data-title="Author">@p.User.FullName</div>
+                    <div class="cell" data-title="TimeModified">@p.TimeModified</div>
+                    <div class="cell" data-title="Content">@p.Content</div>
+                    @if (p.status == 1)
+                    {
+                        <div class="cell active" data-title="Status">Active</div>
+                    }
+                    @if (p.status == 0)
+                    {
+                        <div class="cell disabled" data-title="Status">Disable</div>
+                    }
+
+                    <div class="btn">
+                        <a href="">
+                            @*@Url.Action("AccountDetail", "Admin", new { id = u.Id })*@
+                        <button id="detail" type="button">Detail</button>
+                    </a>
+                    @*<button id="edit" type="button" onclick="alert('Button was clicked')">Chỉnh sửa</button>*@
+                    @if (p.status == 1)
+                    {
+                        <a href="@Url.Action("ChangeStatusPost", "Admin", new { id = p.Id, status = p.status })">
+                            <button id="delete" type="button">Disable</button>
+                        </a>
+                    }
+                    @if (p.status == 0)
+                    {
+                        <a href="@Url.Action("ChangeStatusPost", "Admin", new { id = p.Id, status = p.status })">
+                            <button id="active" type="button">Active</button>
+                        </a>
+                    }
+                </div>
+                </div>
+            }
+        }
+        
+
+    </div>
+</div>

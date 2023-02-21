@@ -1,0 +1,200 @@
+﻿@{
+    ViewData["Title"] = "Diễn đàn";
+}
+<script src="~/js/Social/Index.js"></script>
+<link href="~/css/SocialPage.css" rel="stylesheet" />
+
+<div id="mainlay" class="mainPost">
+    <!-------------------Form tao bai viet------------------------------>
+    @{
+        _User u = ViewBag.LoginUser;
+        if (u == null)
+            u = new _User();
+        if (u.FullName != null)
+        {
+            <div class="add-post-area">
+                <div class="input-area" onclick="showPostForm()">
+                    <a href="#"><img class="avt" src="@u.Image" /></a>
+                    <input class="inputcontain" id="show-form" placeholder="Đăng bài viết" />
+                    <hr>
+                    <div class="btn-area">
+                        <button class="btn-post">Đăng bài</button>
+                        <button class="btn-add-image">
+                            <div>
+                                <span>
+                                    <i class="add-image"></i>
+                                    <span>Ảnh</span>
+                                </span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div style="height:150px"></div>
+        }
+    }
+    <!-------------------END HERE------------------------------>
+    <!-------------------DANH SACH BAI DANG--------------------------->
+    @{
+        List<Post> Posts = new List<Post>();
+        Posts = ViewBag.ListPost;
+        List<PostLike> listUserLikePost = new List<PostLike>();
+        /*.UserLikePost = listUserLikePost;*/
+
+        int isLike = 0;
+
+        @foreach (var p in Posts)
+        {
+            <div class="post-contain">
+                <div class="post_topbar">
+                    <div class="post_info" onmousemove="hide()">
+                        <img class="avt" src="@p.User.Image" alt="">
+                        <div class="user_name">
+                            <h4 style="margin-bottom:0;">@p.User.FullName</h4>
+                            <span class="post_time"><i class="fa-solid fa-clock" aria-hidden="true"></i> @p.TimeModified</span>
+                        </div>
+                    </div>
+
+                    @*<div class="post_option">
+                            <a href="#" title="" class="ed-opts-open"><i onmousemove="show()" onmouseout="hide()" class="fa fa-ellipsis-v"></i></a>
+                            <ul id="hidemenus" onmousemove="show()" onmouseout="hide()" class="ed-options">
+                                <li><a href="#" title="">Edit Post</a></li>
+                                <li><a href="#" title="">Ẩn bài viết</a></li>
+                            </ul>
+                        </div>*@
+                </div>
+
+                <!--Content of post-->
+                <div class="post_content">
+                    <p style="text-align:left;">@p.Content</p>
+                    <img src="@p.ImagePath" width="526" />
+                </div>
+                @if (!String.IsNullOrEmpty(p.ImagePath))
+                {<br />}
+                <!--Status bar-->
+                <div class="post-status-bar">
+                    <div class="post-status">
+                        <span>@p.LikeCount</span>
+                        <a href="#"><i class="fas fa-heart"></i> Like</a>
+                    </div>
+                    <div class="post-status" onclick="showCmtForm(@p.Id)">
+                        <span>@p.CommentCount</span>
+                        <a href="#" class="com"><i class="fas fa-comment-alt"></i> Comment</a>
+                    </div>
+                    @if (p.User.Id == u.Id)
+                    {
+                        <div class="post-status">
+                            <div style="color: red; border:none;">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                <span>Delete</span>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <!--Form binh luan bai viet-->
+            List<PostComment> postComments = new List<PostComment>();
+            postComments = ViewBag.postComments;
+            <form method="post" class="PostComment-container hidden" id="post@(p.Id)" action="@Url.Action("CreateComment", "Social")">
+                <div style="display:none"><input name="postId" value="@p.Id"/></div>
+                <div style="display:none"><input name="userId" value="@u.Id"/></div>
+                <div class="cmt-post-header">
+                    <h2>Bài viết của @p.User.FullName</h2>
+                </div>
+                <hr>
+                <div class="post_content">
+                    <p style="text-align:left;">@p.Content</p>
+                    <img src="@p.ImagePath" />
+                </div>
+                <hr />
+                <div class="row post-info-area">
+                    <p class="item">@p.LikeCount Like</p>
+                    <p class="item">@p.CommentCount Bình luận</p>
+                </div>
+                <div class="collumn" id="comment-show@(p.Id)">
+                    <!--Danh sach binh luận-->
+                    @foreach (var postCmt in postComments)
+                    {
+                        if (postCmt.PostId == p.Id)
+                        {
+                            <div class="row item-column">
+                                <img class="cmt-avt" src="@postCmt.User.Image" />
+                                <div class="collumn cmt-box">
+                                    <p class="cmt-name">@postCmt.User.FullName</p>
+                                    <p class="cmt-content">@postCmt.Content</p>
+                                </div>
+                            </div>
+                        }
+
+                    }
+                </div>
+                @if(u.FullName != null)
+                {
+                    <div class="row">
+                    <img src="@u.Image" class="avt" style="margin: 22px 10px;">
+                    <input name="Content" type="text" id="inputCmt@(p.Id)" class="add-cmt" placeholder="Bình luận...." />
+                    <label class="send-btn" for="sub-cmt"><i class="fa fa-paper-plane" aria-hidden="true" onclick="addCmt(@p.Id,'@u.FullName','@u.Image')"></i></label>
+                    <input type="submit" id="sub-cmt" class="submit-add-cmt">
+                </div>
+                }
+            </form>
+        }
+    }
+    <div style="height:150px"></div>
+</div>
+
+<!--Form tao bai viet-->
+<div id="overlay" onclick="hideForm()"></div>
+
+<form method="post" action="@Url.Action("CreatePost", "Social")" id="add-post-form" class="add-post-form" style="display: none; z-index: 102;" enctype="multipart/form-data">
+    <div>
+        <h2 style="text-align: center;margin-top: 0;margin-bottom: 0;">Tạo bài viết</h2>
+    </div>
+    <hr>
+    <div>
+        <div class="post_info">
+            <img class="avt" src="@u.Image" alt="">
+            <div class="user_name" style="margin-top: -5px;">
+                <h4 style="margin-bottom:0;">@u.FullName</h4>
+            </div>
+        </div>
+    </div>
+    <div>
+        <textarea name="Content" placeholder="Chia sẻ cảm nghĩ của bạn" required oninvalid="this.setCustomValidity('Nội dung không được để trống')" oninput="setCustomValidity('')"></textarea>
+    </div>
+    <div>
+        <p>Thêm vào bài viết</p>
+        <div class="image-place">
+            <label for="imageUpload" class="custom-file-upload">
+                <i class="add-image"></i> Ảnh
+            </label>
+            <input id="imageUpload" name="Image" type="file" accept="image/*" onchange="loadImg()">
+            <div id="imagePreview">
+                <img id="imgPreview" class="imagePreview" src="https://upload.wikimedia.org/wikipedia/commons/5/59/Empty.png?20091205084734" />
+            </div>
+        </div>
+
+    </div>
+    <div>
+        <input class="submitAdd" type="submit" value="Đăng bài viết">
+    </div>
+</form>
+
+
+
+
+
+
+<script>
+    function show() {
+        let element = document.getElementById('hidemenus');
+        element.classList.add('active');
+    }
+    function hide() {
+        let element = document.getElementById('hidemenus');
+        element.classList.remove('active');
+    }
+</script>

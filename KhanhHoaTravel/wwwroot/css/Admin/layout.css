@@ -1,0 +1,86 @@
+﻿body {
+    font-family: "Helvetica Neue", Helvetica, Arial;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+    color: #3b3b3b;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+    background-color: #FFFAF0;
+    margin: 0;
+}
+
+@media screen and (max-width: 580px) {
+    body {
+        font-size: 16px;
+        line-height: 22px;
+    }
+}
+
+a {
+    text-decoration: none;
+}
+    a:hover {
+        color: orange;
+    }
+
+i {
+    margin-top: 10px;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+}
+
+.header {
+    display: flex;
+    background-color: #110510;
+    box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+}
+#logo {
+    margin-top: 10px;
+    position:relative;
+    left:5vh;
+}
+
+.header h3 {
+    padding-left: 28%;
+    color: white;
+    font-size: 25px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    margin-right: 35vw;
+}
+
+#label-out {
+    margin-left: 10px;
+    margin-top: 18px;
+    color: white;
+}
+
+.main {
+    display: flex;
+    margin: 0;
+}
+
+.tab {
+    display: flex;
+    width: 15%;
+    flex-direction: column;
+    padding-top: 20px;
+    padding-left: 20px;
+    margin-right: 20px;
+}
+
+.tab-item {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: 1px solid;
+    text-align: center;
+    border-radius: 1rem;
+}
+
+
+
+
+

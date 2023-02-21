@@ -1,0 +1,55 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_adminLayout";
+}
+
+<link href="~/css/Admin/AccountDetail.css" rel="stylesheet" />
+@{
+    _User user = new _User();
+    user = ViewBag.UserDetail;
+    <div class="left-side">
+        <h1>USER INFORMATION</h1>
+        <div class="content" style="display: inline-block;">
+            <table>
+                <tr>
+                    <td><label>Username: </label></td>
+                    <td id="info">@user.UserName</td>
+                </tr>
+                <tr>
+                    <td><label>Password: </label></td>
+                    <td id="info">@user.Password</td>
+                </tr>
+                <tr>
+                    <td><label>Name: </label></td>
+                    <td id="info">@user.FullName</td>
+                </tr>
+                <tr>
+                    <td><label>Phone number: </label></td>
+                    <td id="info">@user.Phone</td>
+                </tr>
+                <tr>
+                    <td><label>Email: </label></td>
+                    <td id="info">@user.Email</td>
+                </tr>
+                <tr>
+                    <td><label>Website: </label></td>
+                    <td id="info">@user.Website</td>
+                </tr>
+                <tr>
+                    <td><label>FaceBook: </label></td>
+                    <td id="info">@user.FaceBook</td>
+                </tr>
+                <tr>
+                    <td><label>Date Create: </label></td>
+                    <td id="info">@user.DateCreate</td>
+                </tr>
+
+            </table>
+        </div>
+        <nav>
+            <img src="@user.Image" width="200" height="200" alt="Image Profile">
+        </nav>
+    </div>
+}

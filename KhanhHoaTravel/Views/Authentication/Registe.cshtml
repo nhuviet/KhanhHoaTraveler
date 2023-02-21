@@ -1,0 +1,134 @@
+﻿@page
+@model KhanhHoaTravel.Views.Authentication.RegisteModel
+
+@{
+    
+    Layout = "";
+}
+<link rel="stylesheet" href="~/css/Authentication/main.css" type="text/css" media="all" />
+
+<main class="main">
+    <!-- form section start -->
+    <section class="w3l-workinghny-form">
+        <!-- /form -->
+        <div class="workinghny-form-grid">
+            <div class="wrapper">
+                <div class="logo">
+                </div>
+                <div class="workinghny-block-grid">
+                    <div class="form-right-inf">
+                        <div class="login-form-content">
+                            <h2>Đăng kí</h2>
+                            <form action="Create" class="signin-form" method="post">
+                                <div class="one-frm">
+                                    <input type="text" name="UserName" placeholder="Tên đăng nhập" required="" autocomplete="off" autofocus>
+                                </div>
+                                <div class="one-frm">
+                                    <input type="password" name="Password" id="pass" onkeydown="removeVietnameseTones()" placeholder="Mật khẩu" required="" autocomplete="off">
+                                </div>
+                                <div id="passalert" class="text-danger text-center" style="color:red;"></div>
+                                <div class="one-frm">
+                                    <input type="password" onkeypress="validate(event)" name="Password" id="repass" onchange="comparePass()" placeholder="Xác nhận mật khẩu" required="" autocomplete="off">
+                                </div>
+                                <label class="check-remaind">
+                                    <input type="checkbox" onclick="hideShowPassword()">
+                                    <span class="checkmark"></span>
+                                    <p class="remember">Hiện mật khẩu</p>
+                                </label>
+                                <div class="one-frm">
+                                    <input type="text" name="FullName" placeholder="Họ và tên" required="" autocomplete="off">
+                                </div>
+                                <div class="one-frm">
+                                    <input type="text" name="Email" placeholder="Email" autocomplete="off">
+                                </div>
+                                @*<div class="one-frm">
+                                        <input type="text" name="Phone" placeholder="Số điện thoại" autocomplete="off">
+                                    </div>
+                                    <div class="one-frm">
+                                        <input type="text" name="FaceBook" placeholder="FaceBook" autocomplete="off" >
+                                    </div>
+                                    <div class="one-frm">
+                                        <input type="text" name="Website" placeholder="Website" autocomplete="off">
+                                    </div>*@
+                                <button class="btn btn-style mt-3" action="submit">Đăng kí</button>
+                                <p class="already">Đã có tài khoản? <a asp-controller="Authentication" asp-action="SignIn">Đăng nhập</a></p>
+                                <p class="already"><a asp-controller="Home" asp-action="Index">Quay lại trang chủ</a></p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- //form onkeydown -->
+    </section>
+    <!-- //form section start -->
+    <script>
+        function comparePass() {
+            let pass = document.getElementById("pass").value;
+            let repass = document.getElementById("repass").value;
+            if (pass != repass) {
+                document.getElementById("passalert").innerHTML = "Mật khẩu không trùng khớp"
+            }
+            else {
+                document.getElementById("passalert").innerHTML = ""
+            }
+
+        }
+        function validate(e) {
+            var ev = e || window.event;
+            var key = ev.keyCode || ev.which;
+            key = String.fromCharCode(key);
+            var regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$";
+            if (!regex.test(key)) {
+                ev.returnValue = false;
+                if (ev.preventDefault) ev.preventDefault();
+                document.getElementById("passalert").innerHTML = "Ít nhất 6 kí tự, một chữ cái hoa, một chữ cái thường và một số"
+            }
+            removeVietnameseTones();
+        }
+        function removeVietnameseTones() {
+            let text = document.getElementById("pass").value;
+            let str = removeAccents(text);
+            document.getElementById('pass').value = str;
+        }
+
+        function removeAccents(str) {
+            var AccentsMap = [
+                "aàảãáạăằẳẵắặâầẩẫấậ",
+                "AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬ",
+                "dđ", "DĐ",
+                "eèẻẽéẹêềểễếệ",
+                "EÈẺẼÉẸÊỀỂỄẾỆ",
+                "iìỉĩíị",
+                "IÌỈĨÍỊ",
+                "oòỏõóọôồổỗốộơờởỡớợ",
+                "OÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢ",
+                "uùủũúụưừửữứự",
+                "UÙỦŨÚỤƯỪỬỮỨỰ",
+                "yỳỷỹýỵ",
+                "YỲỶỸÝỴ"
+            ];
+            for (var i = 0; i < AccentsMap.length; i++) {
+                var re = new RegExp('[' + AccentsMap[i].substr(1) + ']', 'g');
+                var char = AccentsMap[i][0];
+                str = str.replace(re, char);
+            }
+            return str;
+        }
+
+        function hideShowPassword() {
+            var x = document.getElementById("pass");
+            var y = document.getElementById("repass")
+            if (x.type === "password" || y.type === "password") {
+                x.type = "text";
+                y.type = "text";
+            }
+            else {
+                x.type = "password";
+                y.type = "password";
+            }
+        }
+    </script>
+
+</main>
+

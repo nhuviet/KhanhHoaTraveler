@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - KhanhHoaTravel</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="shortcut icon" type="png" href="~/image/page-logo1.jpg">
+
+    <!------------------------START--------------------------->
+    <!--=============== REMIXICONS ===============-->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+
+    <!--=============== SWIPER CSS ===============-->
+    <link rel="stylesheet" href="~/css/cssmain/swiper-bundle.min.css">
+
+    <!--=============== CSS ===============-->
+    <link rel="stylesheet" href="~/css/cssmain/styles.css">
+    <!-----------------------CLOSE---------------------------->
+</head>
+<body>
+    <header class="header" id="header">
+
+        <nav class="nav container">
+            <a class="nav__logo" asp-controller="Home" asp-action="Index">
+                @*<img src="~/image/page-logo1.jpg" class="logo__image" style="height:80px;width:auto; border-radius:10px" alt="Logo Image">*@
+                <img src="~/image/logo5.png" class="logo__image" style="height:80px;width:auto; border-radius:10px" alt="Logo Image">
+            </a>
+
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item">
+                        <a id="nav-item-1" class="nav__link" asp-area="" asp-controller="Home" asp-action="Index">Trang chủ</a>
+                    </li>
+                    <li class="nav__item">
+                        <a id="nav-item-1" class="nav__link " asp-area="" asp-controller="Service" asp-action="Index">Du lịch</a>
+                    </li>
+                    <li class="nav__item">
+                        <a id="nav-item-1" class="nav__link " asp-area="" asp-controller="Social" asp-action="Index">Diễn đàn</a>
+                    </li>
+                    <li class="nav__item">
+                        <a id="nav-item-1" class="nav__link " asp-area="" asp-controller="Contact" asp-action="Index">Liên hệ</a>
+                    </li>
+                    @Html.Partial("_User")
+                </ul>
+
+
+                <div class="nav__dark">
+                    <!-- Theme change button -->
+                    <span class="change-theme-name">Chế độ tối</span>
+                    <i class="ri-moon-line change-theme" id="theme-button" style=" top: -5px; position: relative;"></i>
+                </div>
+
+                <i class="ri-close-line nav__close" id="nav-close"></i>
+            </div>
+
+            <div class="nav__toggle" id="nav-toggle">
+                <i class="ri-function-line"></i>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            <!---->
+            @RenderBody()
+        </main>
+    </div>
+
+    <div style="height: 30px;"></div>
+
+    <footer class="border-top footer text-muted" style="display:flex">
+        <div class="container">
+            2022 - KhanhHoaTravel - <a href="https://www.facebook.com/nhu.viet.2556/" target="_blank">Trần Như Việt</a>
+        </div>
+        <div class="chatbox-area" style="display:none">
+            <div class="btn-opCB" onclick="showchatbox()">
+                <i class="fab fa-facebook-messenger"></i>
+            </div>
+            <div class="chatbox" id="KHTChatbox">
+                <div class="cb-header">
+                    <h3>Chatbox</h3>
+                    <button id="cb-close-btn" onclick="hidechatbox()">X</button>
+                </div>
+                <div class="messages"></div>
+                <div class="cb-input">
+                    <input type="text" id="message-input" placeholder="Type your message here...">
+                    <button id="send-btn">Gửi</button>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--========== SCROLL UP ==========-->
+    <a href="#" class="scrollup" id="scroll-up">
+        <i class="ri-arrow-up-line scrollup__icon"></i>
+    </a>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+
+    <!--=============== SCROLL REVEAL===============-->
+    <script src="~/js/jsmain/scrollreveal.min.js"></script>
+
+    <!--=============== SWIPER JS ===============-->
+    <script src="~/js/jsmain/swiper-bundle.min.js"></script>
+
+    <!--=============== MAIN JS ===============-->
+    <script src="~/js/jsmain/main.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

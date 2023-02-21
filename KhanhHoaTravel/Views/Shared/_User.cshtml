@@ -1,0 +1,91 @@
+﻿<style>
+    nav {
+        position: relative;
+        width: clamp(320px, 50vw,100%);
+    }
+
+
+    #toggle {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 30%;
+        z-index: 3;
+        opacity: 0;
+        cursor: pointer;
+        height: 40px;
+    }
+
+    #toggle:checked ~ ul {
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    #toggle:not(:checked) ~ ul {
+        opacity: 1;
+        transition: opacity 0.3s ease-in-out;
+    }
+
+
+    nav .dropMenu {
+        padding-left: 0;
+        padding-top: 2.5rem;
+        margin-top: 0;
+        right: 0;
+        background: rgba(0,0,0,0);
+        list-style: none;
+        overflow: hidden;
+        text-align: right;
+        text-align: center;
+        transition: all 0.4s ease-out;
+        width: 30%;
+        position: absolute;
+    }
+
+        nav .dropMenu .dropItem {
+            position: relative;
+            display: block;
+            line-height: 1.5;
+            margin: 0 0 0.25rem 0;
+            transition: background 1s;
+        }
+        .dropBoxHead{
+            z-index:2;
+        }
+            nav .dropMenu .dropItem:hover,
+            nav .dropMenu .dropItem a:focus {
+                background: rgba(0, 0, 0, 0.1);
+                transition: background 0.45s;
+            }
+
+    .dropMenu {
+        display: block;
+        color: inherit;
+    }
+</style>
+@{
+    _User u = ViewBag.LoginUser;
+    if (u == null)
+        u = new _User();
+    if (u.UserName != null)
+    {
+        <input class="nav__item" id="toggle" type="checkbox" checked>
+        <li class="nav__item dropBoxHead">
+            <p class="nav__link">Xin chào @u.FullName</p>
+        </li>
+        <ul class="dropMenu">
+            <li class="dropItem"><a class="nav__link " asp-area="" asp-controller="Home" asp-action="UserInfo">Thông tin</a></li>
+            
+            <li class="dropItem"><a class="nav__link " href='@Url.Action("LogOut", "Home")'>Đăng xuất</a></li>
+        </ul>
+    }
+    else
+    {
+        <li class="nav__item">
+            <a class="nav__link " asp-area="" asp-controller="Authentication" asp-action="SignIn">Đăng nhập</a>
+        </li>
+        <li class="nav__item">
+            <a class="nav__link " asp-area="" asp-controller="Authentication" asp-action="Register">Đăng kí</a>
+        </li>
+    }
+}

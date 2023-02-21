@@ -1,0 +1,86 @@
+﻿@{
+    ViewData["Title"] = "Đăng nhập";
+    Layout = "";
+}
+
+<link rel="stylesheet" href="~/css/Authentication/main.css" type="text/css" media="all" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+<link href="~/css/Authentication/SignIn.css" rel="stylesheet" />
+
+<main class="main">
+    <!-- form section start -->
+    <section class="w3l-workinghny-form">
+        <!-- /form -->
+        <div class="workinghny-form-grid">
+            <div class="wrapper">
+                <div class="logo">
+                </div>
+                <div class="workinghny-block-grid">
+                    <div class="form-right-inf">
+                        <div class="social-media">
+                            <a href="https://www.facebook.com/" class="fb"><i class="fa-brands fa-square-facebook"></i> Đăng nhập bằng Facebook</a>
+                        </div>
+                        <div class="social-media">
+                            <a asp-area="" asp-controller="Authentication" asp-action="GoogleAuth" class="gg"><i class="fab fa-google fa-1x"></i> Đăng nhập bằng Google</a>
+                        </div>
+                        <div class="login-form-content">
+                            <h2>Đăng nhập bằng tài khoản</h2>
+                            <form action="Verify" class="signin-form" method="post">
+                                <div class="one-frm">
+                                    <input type="text" name="UserName" placeholder="Tên đăng nhập" required="" autofocus>
+                                </div>
+                                <div class="one-frm">
+                                    <span>
+                                        <input type="password" id="pass" name="Password" placeholder="Mật khẩu" required="">
+                                        <label class="check-remaind">
+                                            <input type="checkbox" onclick="hideShowPassword()">
+                                            <span class="checkmark"></span>
+                                            <p class="remember">Hiện mật khẩu</p>
+                                        </label>
+                                    </span>
+                                </div>
+                                <label class="check-remaind">
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                    <p class="remember">Lưu mật khẩu</p>
+
+                                </label>
+                                <button class="btn btn-style mt-3">Đăng nhập</button>
+                                <p class="already">Chưa có tài khoản? <a asp-controller="Authentication" asp-action="Register">Đăng kí ngay</a></p>
+                                <p class="already"><a asp-controller="Home" asp-action="Index">Quay lại trang chủ</a></p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- //form -->
+
+    </section>
+
+    @{
+        if (ViewBag.Flog == 1)
+        {
+        <div class="alert danger-alert FailLog" style="position: absolute; top: 0; left: 5%;">
+            <h3 style="font-family: Quicksand;">Fail Login</h3>
+            <a class="close">&times;</a>
+        </div>
+        }
+    }
+    <script>
+        function hideShowPassword() {
+            var x = document.getElementById("pass");
+            if (x.type === "password") {
+                x.type = "text";
+            }
+            else {
+                x.type = "password";
+            }
+        }
+        $(".close").click(function () {
+            $(this)
+                .parent(".alert")
+                .fadeOut();
+        });
+    </script>
+</main>

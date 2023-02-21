@@ -1,0 +1,72 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_adminLayout";
+}
+<link href="~/css/Admin/table.css" rel="stylesheet" />
+<link href="~/css/Admin/star.css" rel="stylesheet" />
+
+<div class="wrapper">
+    <div class="table">
+        <div class="row header">
+            <div class="cell">Title</div>
+            <div class="cell">Author</div>
+            <div class="cell">Rating</div>
+            <div class="cell">Genre</div>
+            <div class="cell">State</div>
+            <div class="cell"></div>
+        </div>
+        <!--Data-->
+        @{
+            List<EntertainmentPlace> places = new List<EntertainmentPlace>();
+            places = ViewBag.postList;
+            foreach (var p in places)
+            {
+                <div class="row">
+                    <div class="cell" data-title="Title">@p.Title</div>
+                    <div class="cell" data-title="Author">@p.Author</div>
+                    <div class="cell" data-title="Rating">
+                        <div class="stars">
+                            <form action="">
+                                @for (int i = 0; i < Math.Round(p.Rate); i++)
+                                {
+                                    <label class="star"></label>
+                                }
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="cell" data-title="Genre">@p.Genre</div>
+                    @if (p.Status == 1)
+                    {
+                        <div class="cell active" data-title="Status">Active</div>
+                    }
+                    @if (p.Status == 0)
+                    {
+                        <div class="cell disabled" data-title="Status">Disable</div>
+                    }
+
+                    <div class="btn">
+                        <a href="@Url.Action("PlaceDetail", "Service", new { id = p.Id })"><button id="detail" type="button">Detail</button></a>
+                        @*<button id="edit" type="button" onclick="alert('Button was clicked')"> Chỉnh sửa</button>*@
+
+                        @if (p.Status == 1)
+                        {
+                            <a href="@Url.Action("ChangeStatusPlace", "Admin", new { id = p.Id, status = p.Status })">
+                                <button id="delete" type="button">Disable</button>
+                            </a>
+                        }@if (p.Status == 0)
+                        {
+                            <a href="@Url.Action("ChangeStatusPlace", "Admin", new { id = p.Id, status = p.Status })">
+                                <button id="active" type="button">Active</button>
+                            </a>
+                        }
+                    </div>
+                </div>
+            }
+        }
+
+
+    </div>
+</div>

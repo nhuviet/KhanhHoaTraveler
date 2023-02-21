@@ -1,0 +1,186 @@
+﻿.absolute {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+    object-position: 83%;
+}
+
+.tran-card {
+    background-color: rgba(255,255,255,0.75);
+}
+
+.avt {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+
+/*Form input*/
+#overlay {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: none;
+    background:rgba(0,0,0,0.5);
+}
+
+.editform {
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    top: 15%;
+    left: 20%;
+    background-color: rgba(0, 0, 0, 0.35);
+    height: 30vw;
+    border-radius: 2rem;
+    width: 60vw;
+    z-index: 1;
+}
+
+.right-side {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 30px;
+}
+
+input[type="text"] {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid rgb(50,50,50);
+}
+
+    input[type="text"]:focus {
+        outline: none;
+        border-bottom: 1px solid rgb(20,20,20);
+    }
+
+#name {
+    height: 50px;
+    background: transparent;
+    position: relative;
+    font-size: 20px;
+    color: #F8F8F8;
+    text-align:center;
+}
+
+.left-side {
+    position: relative;
+    top: 3vw;
+    margin: 10px 30px;
+}
+
+    .left-side label {
+        padding-right: 50px;
+        font-size: 20px;
+        font-family: monospace;
+        color: white;
+    }
+
+    .left-side input {
+        width: 20vw;
+        height: 50px;
+        background: transparent;
+        position: relative;
+        font-size: 20px;
+        color: #F8F8F8;
+    }
+
+.btn-area {
+    position: relative;
+    top: 80%;
+    right: 10%;
+}
+
+    .btn-area input {
+        width: 100px;
+        padding: 10px;
+        border-radius: 0.75rem;
+        background: rgb(20,255,20);
+        color: rgb(100,100,100);
+        font-weight: bold;
+    }
+
+        .btn-area input:hover {
+            background-color: rgb(10,200,10);
+            color: rgb(200,200,200);
+        }
+
+/*Img input*/
+
+.avatar-upload {
+    position: relative;
+    max-width: 205px;
+    margin: 50px auto;
+}
+
+    .avatar-upload .avatar-edit {
+        position: absolute;
+        right: 12px;
+        z-index: 1;
+        top: 10px;
+    }
+
+        .avatar-upload .avatar-edit input {
+            display: none;
+        }
+
+            .avatar-upload .avatar-edit input + label {
+                display: inline-block;
+                width: 34px;
+                height: 34px;
+                margin-bottom: 0;
+                border-radius: 100%;
+                background: #FFFFFF;
+                border: 1px solid transparent;
+                box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+                cursor: pointer;
+                font-weight: normal;
+                transition: all .2s ease-in-out;
+            }
+
+                .avatar-upload .avatar-edit input + label:hover {
+                    background: #f1f1f1;
+                    border-color: #d6d6d6;
+                }
+
+                .avatar-upload .avatar-edit input + label:after {
+                    content: "\f040";
+                    font-family: 'FontAwesome';
+                    color: #757575;
+                    position: absolute;
+                    top: 5px;
+                    left: 0;
+                    right: 0;
+                    text-align: center;
+                    margin: auto;
+                }
+
+    .avatar-upload .avatar-preview {
+        width: 192px;
+        height: 192px;
+        position: relative;
+        border-radius: 100%;
+        border: 6px solid #F8F8F8;
+        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+    }
+
+        .avatar-upload .avatar-preview > div {
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+            width: 100%;
+            height: 100%;
+            border-radius: 100%;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+/*END*/
+
+
+
+

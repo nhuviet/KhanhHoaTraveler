@@ -1,0 +1,67 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@{
+    ViewData["Title"] = "Chi tiết";
+}
+
+<link href="~/css/Service/ServiceDetail.css" rel="stylesheet" />
+<div style="height:73px"></div>
+@{
+    EntertainmentPlace place = new EntertainmentPlace();
+    List<string> imageList = new List<string>();
+    place = ViewBag.place;
+    imageList = ViewBag.imgLst;
+    <div>
+        <div class="mainContent" id="mainContent">
+            <div class="place-img">
+                <div class="main-img">
+                    <img id="main-Image" src="@place.ImagePath" />
+                </div>
+                <div class="sub-img">
+                    @foreach (var img in imageList)
+                    {
+                        <img id="firstImg" src="@img" onclick="changebg('@img')" />
+                    }
+                </div>
+            </div>
+            <div class="content">
+                <h2>@place.Title</h2>
+                <span><i class="fa fa-map-marker" aria-hidden="true"></i> @place.Address</span>
+                <br />
+                <span><i class="fa-solid fa-clock"></i> @place.TimeOpen - @place.TimeClose</span>
+                <p>Rating: @Math.Round(place.Rate, 1) <i class="fa fa-star" style="color:yellow" aria-hidden="true"></i></p>
+                <p id="Descr">@place.Description</p>
+                @{
+                    _User user = ViewBag.LoginUser;
+                    if (user.Role == "admin")
+                    {
+                        if (place.Status == 1)
+                        {
+                            <div class="delete_btn">
+                                <a href="@Url.Action("ChangeStatusPlace", "Admin", new { id = place.Id, status = place.Status })">Disable</a>
+                            </div>
+                        }@if (place.Status == 0)
+                        {
+                            <div class="delete_btn">
+                                <a href="@Url.Action("ChangeStatusPlace", "Admin", new { id = place.Id, status = place.Status })">Active</a>
+                            </div>
+                        }
+                    }
+                }
+
+            </div>
+        </div>
+        <div class="blur"></div>
+    </div>
+}
+
+
+<script>
+    document.getElementById("mainContent").style.backgroundImage = 'url("' + document.getElementById("firstImg").src + '")';
+    function changebg(imageURL) {
+        document.getElementById("main-Image").src = imageURL;
+        document.getElementById("mainContent").style.backgroundImage = 'url("' + imageURL + '")';
+    }
+</script>

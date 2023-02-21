@@ -1,0 +1,41 @@
+﻿a {
+    text-decoration: none;
+}
+
+.left-side {
+    position: relative;
+    top: 2vw;
+    left: 6vw;
+}
+
+    .left-side h1 {
+        position: relative;
+        left: 50%;
+        top: 0;
+        color: red;
+    }
+
+table {
+    border-spacing: 20px;
+    width:40vw;
+}
+
+.left-side label {
+    padding-right: 30px;
+    font-size: 20px;
+}
+
+#info {
+    font-size: 18px;
+}
+
+.left-side nav {
+    display: inline-block;
+    position: fixed;
+    margin: 10px 0 0 10px;
+}
+
+    .left-side nav img {
+        border-radius: 50%;
+        object-fit:cover;
+    }
